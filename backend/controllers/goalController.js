@@ -2,8 +2,12 @@ const asyncHandler = require('express-async-handler');
 const Bank = require('../models/goalModel')
 
 const getGoals = asyncHandler(async (req,res) => {
+    const date = new Date;
+    let hours = date.getHours();
+    let status = (hours < 12)? "Morning" :
+             ((hours <= 18 && hours >= 12 ) ? "Afternoon" : "Night");
     const banks = await Bank.find()
-    res.status(200).json(banks)
+    res.status(200).json('banks':banks,'msg':status);
 })
 
 const setGoal = asyncHandler(async (req,res) => {
@@ -23,7 +27,7 @@ res.send(status);
         email: req.body.email,
         status: req.body.status,
     })
-    res.status(200).json(bank)
+    res.status(200).json('banks':banks,'msg':status);
 })
 
 const updateGoal =asyncHandler(async (req,res) => {
