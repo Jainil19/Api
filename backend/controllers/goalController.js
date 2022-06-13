@@ -6,7 +6,7 @@ const getGoals = asyncHandler(async (req, res) => {
   let hours = date.getHours();
   let status =
     hours < 12 ? 'Morning' : hours <= 18 && hours >= 12 ? 'Afternoon' : 'Night';
-  res.send(status);
+
   const banks = await Bank.find();
   res.status(200).json({ greeting: status, banks: banks });
 });
@@ -21,7 +21,6 @@ const setGoal = asyncHandler(async (req, res) => {
   let hours = date.getHours();
   let status =
     hours < 12 ? 'Morning' : hours <= 18 && hours >= 12 ? 'Afternoon' : 'Night';
-  res.send(status);
 
   const bank = await Bank.create({
     name: req.body.name,
